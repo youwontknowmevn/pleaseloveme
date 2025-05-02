@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Do You Love Me?</title>
+  <style>
+    body {
+      background-color: pink;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    h1 {
+      font-size: 48px;
+      margin-top: 80px;
+      position: relative;
+      z-index: 1;
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 20px;
+      margin: 10px;
+      cursor: pointer;
+      border-radius: 10px;
+      border: none;
+      z-index: 2;
+    }
+    #yesBtn {
+      background-color: #ff69b4;
+      color: white;
+    }
+    #noBtn {
+      background-color: #aaa;
+      color: white;
+      position: absolute;
+    }
+    #response, #begMessage {
+      font-size: 36px;
+      margin-top: 50px;
+      display: none;
+      z-index: 1;
+    }
+    #sticker {
+      width: 150px;
+      margin-top: 20px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Do you love me?</h1>
+  <button id="yesBtn">Yes 💘</button>
+  <button id="noBtn" style="top: 300px; left: 45%;">No 💔</button>
+  <div id="begMessage">Please love me babe 🥺💗</div>
+  <div id="response">I love you too 💖</div>
+  <img id="sticker" src="https://shorturl.at/BYhrC" alt="Cute heart sticker">
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const response = document.getElementById("response");
+    const sticker = document.getElementById("sticker");
+    const begMessage = document.getElementById("begMessage");
+
+    let noClickCount = 0;
+
+    noBtn.addEventListener("click", () => {
+      noClickCount++;
+      if (noClickCount >= 10) {
+        noBtn.style.display = "none";
+        begMessage.style.display = "block";
+      } else {
+        let x = Math.random() * (window.innerWidth - 100);
+        let y = Math.random() * (window.innerHeight - 50);
+
+        // Avoid blocking the center area (where main text is)
+        if (y > 200 && y < 500 && x > window.innerWidth / 3 && x < window.innerWidth * 2 / 3) {
+          y += 150;
+        }
+
+        noBtn.style.left = `${x}px`;
+        noBtn.style.top = `${y}px`;
+      }
+    });
+
+    yesBtn.addEventListener("click", () => {
+      response.style.display = "block";
+      sticker.style.display = "block";
+      begMessage.style.display = "none";
+    });
+  </script>
+</body>
+</html>
